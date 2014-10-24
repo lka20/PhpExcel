@@ -6,6 +6,7 @@ Myapp/vendor/phpexcel/PHPExcel
 Myapp/vendor/phpexcel/PHPExcel.php
 
 modificar el archivo composer y dejarlo de la siguiente manera:
+//
 "autoload": {
 		"psr-4": {
 			"App\\": "src"
@@ -14,17 +15,18 @@ modificar el archivo composer y dejarlo de la siguiente manera:
         "vendor/phpexcel" //Esta es la linea que se agrega
     	]
 	},
-
+//
 entrar en la carpeta myapp
 y ejecutar la sentencia: composer dump-autoload
 copiar PhpExcelComponent.php a Myapp/src/Controller/Component/
 copiar  PhpExcelHelper.php a Myapp/src/View/Helper/
 
 en el AppController
+//
 public function initialize() {
 		$this->loadComponent('PhpExcel');
 	}
-	
+//	
 y seguir como se explica a continuacion:
 PHPExcel is a great library that can create XLS files. For more information see [PHPExcel project homepage](http://phpexcel.codeplex.com/).
 
