@@ -1,5 +1,8 @@
 <?php
-App::uses('AppHelper', 'View/Helper');
+namespace App\View\Helper;
+
+use Cake\View\Helper;
+use Cake\View\View;
 
 /**
  * Helper for working with PHPExcel class.
@@ -7,7 +10,7 @@ App::uses('AppHelper', 'View/Helper');
  * @package PhpExcel
  * @author segy
  */
-class PhpExcelHelper extends AppHelper {
+class PhpExcelHelper extends Helper {
     /**
      * Instance of PHPExcel class
      *
@@ -43,9 +46,8 @@ class PhpExcelHelper extends AppHelper {
      */
     public function createWorksheet() {
         // load vendor classes
-        App::import('Vendor', 'PhpExcel.PHPExcel');
-
-        $this->_xls = new PHPExcel();
+       
+        $this->_xls = new \PHPExcel();
         $this->_row = 1;
 
         return $this;
@@ -59,9 +61,8 @@ class PhpExcelHelper extends AppHelper {
      */
     public function loadWorksheet($file) {
         // load vendor classes
-        App::import('Vendor', 'PhpExcel.PHPExcel');
-
-        $this->_xls = PHPExcel_IOFactory::load($file);
+        
+        $this->_xls = \PHPExcel_IOFactory::load($file);
         $this->setActiveSheet(0);
         $this->_row = 1;
 
@@ -167,7 +168,7 @@ class PhpExcelHelper extends AppHelper {
         // offset
         $offset = 0;
         if (isset($params['offset']))
-            $offset = is_numeric($params['offset']) ? (int)$params['offset'] : PHPExcel_Cell::columnIndexFromString($params['offset']);
+            $offset = is_numeric($params['offset']) ? (int)$params['offset'] : \PHPExcel_Cell::columnIndexFromString($params['offset']);
 
         // font name
         if (isset($params['font']))
@@ -250,11 +251,11 @@ class PhpExcelHelper extends AppHelper {
 
         // filter (has to be set for whole range)
         if (count($this->_tableParams['filter']))
-            $this->_xls->getActiveSheet()->setAutoFilter(PHPExcel_Cell::stringFromColumnIndex($this->_tableParams['filter'][0]) . ($this->_tableParams['header_row']) . ':' . PHPExcel_Cell::stringFromColumnIndex($this->_tableParams['filter'][count($this->_tableParams['filter']) - 1]) . ($this->_tableParams['header_row'] + $this->_tableParams['row_count']));
+            $this->_xls->getActiveSheet()->setAutoFilter(\PHPExcel_Cell::stringFromColumnIndex($this->_tableParams['filter'][0]) . ($this->_tableParams['header_row']) . ':' . PHPExcel_Cell::stringFromColumnIndex($this->_tableParams['filter'][count($this->_tableParams['filter']) - 1]) . ($this->_tableParams['header_row'] + $this->_tableParams['row_count']));
 
         // wrap
         foreach ($this->_tableParams['wrap'] as $col)
-            $this->_xls->getActiveSheet()->getStyle(PHPExcel_Cell::stringFromColumnIndex($col) . ($this->_tableParams['header_row'] + 1) . ':' . PHPExcel_Cell::stringFromColumnIndex($col) . ($this->_tableParams['header_row'] + $this->_tableParams['row_count']))->getAlignment()->setWrapText(true);
+            $this->_xls->getActiveSheet()->getStyle(\PHPExcel_Cell::stringFromColumnIndex($col) . ($this->_tableParams['header_row'] + 1) . ':' . PHPExcel_Cell::stringFromColumnIndex($col) . ($this->_tableParams['header_row'] + $this->_tableParams['row_count']))->getAlignment()->setWrapText(true);
 
         return $this;
     }
@@ -268,7 +269,7 @@ class PhpExcelHelper extends AppHelper {
     public function addData($data, $offset = 0) {
         // solve textual representation
         if (!is_numeric($offset))
-            $offset = PHPExcel_Cell::columnIndexFromString($offset);
+            $offset = \PHPExcel_Cell::columnIndexFromString($offset);
 
         foreach ($data as $d)
             $this->_xls->getActiveSheet()->setCellValueByColumnAndRow($offset++, $this->_row, $d);
@@ -305,7 +306,7 @@ class PhpExcelHelper extends AppHelper {
      * @return PHPExcel_Writer_Iwriter
      */
     public function getWriter($writer) {
-        return PHPExcel_IOFactory::createWriter($this->_xls, $writer);
+        return \PHPExcel_IOFactory::createWriter($this->_xls, $writer);
     }
 
     /**
