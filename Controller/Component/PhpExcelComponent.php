@@ -16,6 +16,7 @@ class PhpExcelComponent extends Component {
      *
      * @var PHPExcel
      */
+    protected $_defaultConfig = [];
     protected $_xls;
 
     /**
