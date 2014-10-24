@@ -1,5 +1,31 @@
-# PhpExcel helper and component for CakePHP 2.x
+# PhpExcel helper and component for CakePHP 3.x
 
+Copiar el contenido de Vendor a vendor/phpexcel/
+quedando los archivos de la siguiente forma:
+Myapp/vendor/phpexcel/PHPExcel
+Myapp/vendor/phpexcel/PHPExcel.php
+
+modificar el archivo composer y dejarlo de la siguiente manera:
+"autoload": {
+		"psr-4": {
+			"App\\": "src"
+		},
+		"classmap": [
+        "vendor/phpexcel" //Esta es la linea que se agrega
+    	]
+	},
+
+entrar en la carpeta myapp
+y ejecutar la sentencia: composer dump-autoload
+copiar PhpExcelComponent.php a Myapp/src/Controller/Component/
+copiar  PhpExcelHelper.php a Myapp/src/View/Helper/
+
+en el AppController
+public function initialize() {
+		$this->loadComponent('PhpExcel');
+	}
+	
+y seguir como se explica a continuacion:
 PHPExcel is a great library that can create XLS files. For more information see [PHPExcel project homepage](http://phpexcel.codeplex.com/).
 
 I added method for setting font and for easy table data adding. Short example:
