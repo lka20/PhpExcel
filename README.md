@@ -1,13 +1,15 @@
 # PhpExcel helper and component for CakePHP 3.x
 
-//Copiar el contenido de Vendor a vendor/phpexcel/
-//quedando los archivos de la siguiente forma:
-Myapp/vendor/phpexcel/PHPExcel
-Myapp/vendor/phpexcel/PHPExcel.php
+	//Copiar el contenido de Vendor a vendor/phpexcel/
+
+	//quedando los archivos de la siguiente forma:
+
+	Myapp/vendor/phpexcel/PHPExcel
+	Myapp/vendor/phpexcel/PHPExcel.php
 
 //modificar el archivo composer y dejarlo de la siguiente manera:
 
-"autoload": {
+	"autoload": {
 		"psr-4": {
 			"App\\": "src"
 		},
@@ -16,14 +18,13 @@ Myapp/vendor/phpexcel/PHPExcel.php
     	]
 	},
 
-entrar en la carpeta myapp
-y ejecutar la sentencia: composer dump-autoload
-copiar PhpExcelComponent.php a Myapp/src/Controller/Component/
-copiar  PhpExcelHelper.php a Myapp/src/View/Helper/
+	Entrar en la carpeta myapp y ejecutar la sentencia: composer dump-autoload
+	copiar PhpExcelComponent.php a Myapp/src/Controller/Component/
+	copiar  PhpExcelHelper.php a Myapp/src/View/Helper/
 
-//en el AppController
+	//en el AppController
 
-public function initialize() {
+	public function initialize() {
 		$this->loadComponent('PhpExcel');
 	}
 	
