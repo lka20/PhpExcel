@@ -16,6 +16,7 @@ class PhpExcelHelper extends Helper {
      *
      * @var PHPExcel
      */
+    protected $_defaultConfig = [];
     protected $_xls;
 
     /**
